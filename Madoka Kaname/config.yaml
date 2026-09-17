@@ -1,0 +1,408 @@
+watch_stylesheet: true
+watch_config: true
+debug: false
+update_check: true
+bars:
+  status-bar:
+    enabled: true
+    screens: ["primary"]
+    class_name: "yasb-bar"
+    alignment:
+      position: "top"
+      align: "center"
+    animation:
+      enabled: true
+      duration: 1000
+    blur_effect:
+      enabled: true
+      round_corners: true
+      dark_mode: true
+    window_flags:
+      always_on_top: false
+      windows_app_bar: true
+    dimensions:
+      width: "100%"
+      height: 54
+    layouts:
+      center:
+        alignment: "center"
+        stretch: false
+    padding:
+      top: 24
+      left: 24
+      bottom: -10
+      right: 24
+    widgets:
+      left:
+        [
+          "home",
+          "clock",
+          "volume",
+          #"bluetooth",
+          "komorebi_workspaces",
+          #"komorebi_active_layout",
+          "active_window"
+        ]
+      center: ["media","quick_launch"]
+      right:
+        [
+          "traffic",
+          "audio_visualizer",
+          "hardware-grouper",
+          "power_menu"
+        ]
+widgets:
+  komorebi_workspaces:
+    type: "komorebi.workspaces.WorkspaceWidget"
+    options:
+      label_offline: "\u23fc Offline"
+      label_workspace_btn: ""
+      label_workspace_active_btn: ""
+      label_workspace_populated_btn: ""
+      label_default_name: ""
+      label_zero_index: false
+      hide_empty_workspaces: true 
+      hide_if_offline: true
+  komorebi_active_layout:
+    type: "komorebi.active_layout.ActiveLayoutWidget"
+    options:
+      hide_if_offline: false
+      label: "{icon}"
+      layouts: ['bsp', 'grid']
+      layout_icons:
+        bsp: "[B]"
+        grid: "[G]"
+      callbacks:
+        on_left: "next_layout"
+        on_middle: "toggle_monocle"
+        on_right: "prev_layout"
+  traffic:
+    type: "yasb.traffic.TrafficWidget"
+    options:
+      label: "<span class='download'>ㅤ\ueab4 {download_speed}</span>ㅤ| <span class='upload'>\ueab7 {upload_speed}</span>ㅤ"
+      label_alt: ""
+      update_interval: 500
+      speed_unit: "bytes"
+      hide_decimal: true
+      menu:
+        blur: true
+        round_corners: true
+        round_corners_type: "normal"
+        border_color: "system"
+        alignment: "left"
+        direction: "down"
+        offset_top: 6
+        offset_left: 0
+      callbacks:
+        on_left: "toggle_menu"
+  audio_visualizer:
+    type: "yasb.audio_visualizer.AudioVisualizerWidget"
+    options:
+      style: bars
+      height: 25
+      smoothness: 50
+      sensitivity: 65
+      auto_gain: true
+      framerate: 120
+      freq_min: 500
+      freq_max: 12000
+      hide_idle: false
+      hide_idle_after: 2000
+      channels: mono
+      mono_option: average
+      reverse: false
+      mirror: true
+      bars:
+        count: 30
+        width: 1
+        gap: 4
+      waves:
+        width: 80
+      dots:
+        count: 24
+        size: 2
+        gap: 4
+  bluetooth:
+    type: "yasb.bluetooth.BluetoothWidget"
+    options:
+      label: "<span style='font-family: \"JetBrainsMono NFP\";'> ∾</span>"
+      label_no_device: ""
+      tooltip: false
+      callbacks:
+        on_left: "toggle_menu"
+      menu_config:
+        blur: true
+        round_corners: true
+        offset_top: 20
+        alignment: "center"
+        labels:
+          title: "Bluetooth"
+          your_devices: "Paired"
+          more_settings: "Settings"
+          power_on: ""
+          power_off: "Activate"
+          new_devices: "Not Paired"
+        device_icons:
+          headphones: ""
+          headset: ""
+          battery:
+            empty: ""
+            low: ""
+            medium: ""
+            high: ""
+            full: ""
+          scan: "Scan"
+  home:
+    type: "yasb.home.HomeWidget"
+    options:
+      blur: true
+      round_corners: true
+      label: "<span>\uf004</span>"
+      menu_list:
+        - { title: "<span style='font-family: \"JetBrainsMono NFP\";'>&#xf013; </span>Settings", command: "start", args: [ "ms-settings:" ], shell: true }
+        - { title: "<span style='font-family: \"JetBrainsMono NFP\";'>&#xf0ad; </span>Control Panel", command: "control", args: [ "" ], shell: true }
+        - { title: "<span style='font-family: \"JetBrainsMono NFP\";'>&#xf437; </span>Task Manager", command: "taskmgr", args: [ "" ], shell: true }
+      system_menu: false
+      power_menu: false
+      alignment: "left"
+      direction: "down"
+  clock:
+    type: "yasb.clock.ClockWidget"
+    options:
+      label: "<span>\uf017</span>{%a | %B %d | %H:%M:%S %p}"
+      tooltip: false
+      timezones: []
+      calendar:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        show_week_numbers: true
+      callbacks:
+        on_left: "toggle_calendar"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  volume:
+    type: "yasb.volume.VolumeWidget"
+    options:
+      label: "<span>{icon}</span>{level}"
+      tooltip: false
+      mute_text: "Muted"
+      icons:
+        - "\ueee8"
+        - "\uf026"
+        - "\uf027"
+        - "\uf027"
+        - "\uf028"
+      audio_menu:
+        blur: true
+        round_corners: true
+        alignment: "left"
+        direction: "down"
+        show_apps: true
+        show_apps_expanded: true
+      callbacks:
+        on_left: "toggle_volume_menu"
+        on_middle: "do_nothing"
+        on_right: "toggle_mute"
+  active_window:
+    type: "yasb.active_window.ActiveWindowWidget"
+    options:
+      label: " ◉ {win[app_name]}"
+      label_no_window: " ◉ Unfocused"
+      label_icon: false
+      label_icon_size: 16
+      max_length: 56
+      max_length_ellipsis: "..."
+      monitor_exclusive: false
+      callbacks:
+        on_left: "do_nothing"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  media:
+    type: "yasb.media.MediaWidget"
+    options:
+      label: "\uf001  {title}  \uee83"
+      label_alt: "\uf001  {artist} {s} {title}  \uee83"
+      separator: "-"
+      hide_empty: true
+      controls_hide: true
+      show_thumbnail: true
+      thumbnail_alpha: 100
+      thumbnail_padding: 0
+      max_field_size:
+        label: 48
+        label_alt: 48
+      scrolling_label:
+        enabled: true
+        update_interval_ms: 60
+        style: "left"
+        separator: "      "
+        always_scroll: false
+      media_menu:
+        blur: true
+        round_corners: true
+        alignment: "center"
+        direction: "down"
+        thumbnail_corner_radius: 8
+        thumbnail_size: 120
+        max_title_size: 100
+        max_artist_size: 100
+        show_source: true
+      media_menu_icons:
+        play: "\uf04b"
+        pause: "\uf04c"
+        prev_track: "\uf048"
+        next_track: "\uf051"
+      progress_bar:
+        enabled: true
+        alignment: bottom
+      callbacks:
+        on_left: "toggle_media_menu"
+  hardware-grouper:
+    type: "yasb.grouper.GrouperWidget"
+    options:
+      class_name: "hardware-grouper"
+      widgets: [
+        "disk",
+        "gpu",
+        "cpu",
+        "memory"
+      ]
+      collapse_options:
+        enabled: false
+        expanded_label: "\uf054"
+        collapsed_label: "\uf053"
+        label_position: "right"
+  cpu:
+    type: "yasb.cpu.CpuWidget"
+    options:
+      label: "<span>\uf4bc</span>R7-3700X: {info[percent][total]}% |"
+      label_alt: "<span>\uf4bc</span> {info[percent][total]}%"
+      update_interval: 15000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  memory:
+    type: "yasb.memory.MemoryWidget"
+    options:
+      label: "<span>\uefc5</span>RAM [DDR4]: {virtual_mem_used}/128G"
+      label_alt: "<span>\uefc5</span> {virtual_mem_percent}%"
+      update_interval: 15000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  gpu:
+    type: "yasb.gpu.GpuWidget"
+    options:
+      label: "<span>\uf2db</span>RX-6950XT: {info[utilization]}% |"
+      label_alt: "<span>\uf2db</span> {info[utilization]}%"
+      update_interval: 15000
+      hide_decimal: true
+      callbacks:
+        on_left: "toggle_label"
+        on_middle: "do_nothing"
+        on_right: "do_nothing"
+  disk:
+    type: "yasb.disk.DiskWidget"
+    options:
+        label: "<span>\uf473</span>"
+        volume_label: "<span>\uf2db</span>"
+        update_interval: 60
+        group_label:
+          volume_labels: ["C", "D", "E", "F"]
+          show_label_name: true
+          blur: True
+          round_corners: True
+          round_corners_type: "small"
+          border_color: "System"
+          alignment: "center"
+          direction: "down"
+        callbacks:
+          on_left: "toggle_group"
+          on_middle: "do_nothing"
+          on_right: "do_nothing"
+  quick_launch:
+    type: "yasb.quick_launch.QuickLaunchWidget"
+    options:
+      label: "<span>\uf002</span>"
+      search_placeholder: "man what u looking for"
+      max_results: 10
+      show_icons: true
+      
+      icon_size: 24
+      providers:
+        apps:
+          enabled: true
+          prefix: "*"
+          show_recent: true
+          max_recent: 5
+          show_description: false
+        bookmarks:
+          enabled: false
+          prefix: "*"
+          browser: "edge"
+          profile: "default"
+        calculator:
+          enabled: true
+          prefix: "="
+        clipboard_history:
+          enabled: true
+          prefix: "#"
+        web_search:
+          enabled: true
+          prefix: "?"
+          engine: "google"
+          remove_engines:
+            - "brave"
+            - "duckduckgo"
+            - "wikipedia"
+            - "reddit"
+            - "stackoverflow"
+            - "x"
+        settings:
+          enabled: true
+          prefix: "!"
+        file_search:
+          enabled: true
+          prefix: "/"
+          backend: "index"
+          show_path: true
+        emoji:
+          enabled: true
+          prefix: ";"
+        color:
+          enabled: true
+          prefix: ":"
+        snippets:
+          enabled: false
+      popup:
+        width: 1000
+        height: 200
+        blur: true
+        round_corners: true
+      callbacks:
+        on_left: "toggle_quick_launch"
+      keybindings:
+        - keys: "alt+space"
+          action: "toggle_quick_launch"
+  power_menu:
+    type: "yasb.power_menu.PowerMenuWidget"
+    options:
+      label: "<span>\uf011</span>"
+      uptime: true
+      show_user: true
+      profile_image_size: 128
+      blur: true
+      blur_background: true
+      button_row: 6
+      menu_style: "fullscreen"
+      buttons:
+        signout: ["\uf08b", "go outside"]
+        shutdown: ["\uf011", "slime Out PC"]
+        restart: ["\uead2", "pls god help me"]
+        cancel: ["\udb81\udf3a", "nvm"]

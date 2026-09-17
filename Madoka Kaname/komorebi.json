@@ -1,0 +1,101 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.41/schema.json",
+  "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
+  "window_hiding_behaviour": "Cloak",
+  "cross_monitor_move_behaviour": "Insert",
+  "default_workspace_padding": 15,
+  "default_container_padding": 15,
+  "border_width": 3,
+  "border_offset": -1,
+  "border": true,
+  "mouse_follows_focus": false,
+
+  "border_colours": {
+    "single": "#c28524",
+    "stack": "#202020",
+    "monocle": "#202020",
+    "unfocused": "#202020"
+  },
+
+  "animation": {
+    "enabled": true,
+    "duration": 300,
+    "fps": 144,
+    "style": "EaseOutSine"
+  },
+
+  "ignore_rules": [
+    {
+      "kind": "Exe",
+      "id": "RobloxPlayerBeta.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "Riot Client.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "RiotClientServices.exe",
+      "matching_strategy": "Equals"
+    }
+  ],
+
+  "floating_applications": [
+    {
+      "kind": "Exe",
+      "id": "javaw.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Auto-Recovery",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Experience Settings",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Select Color",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Blender File View",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "Asset Configuration",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Title",
+      "id": "ParticleEmitter",
+      "matching_strategy": "Contains"
+    }
+  ],
+
+  "tray_and_multi_window_applications": [
+    {
+      "kind": "Exe",
+      "id": "Spotify.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "RobloxStudioBeta.exe",
+      "matching_strategy": "Equals"
+    },
+    {
+      "kind": "Exe",
+      "id": "Discord.exe",
+      "matching_strategy": "Equals"
+    }
+  ]
+}
+ 
