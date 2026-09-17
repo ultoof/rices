@@ -1,0 +1,31 @@
+theme: LiquidGlass
+disableNewStartMenuLayout: ''
+styleConstants:
+  - ''
+controlStyles:
+  - target: Grid#FrameRoot
+    styles:
+      - MaxHeight=90
+      - MinHeight=50
+  - target: Border#AcrylicOverlay
+    styles:
+      - Height=3
+  - target: Windows.UI.Xaml.Controls.Primitives.ToggleButton#ShowHideCompanion
+    styles:
+      - Visibility=Collapsed
+  - target: Grid#RightCompanionContainerGrid
+    styles:
+      - Visibility=Collapsed
+  - target: StartDocked.PowerOptionsView
+    styles:
+      - Visibility=Collapsed
+  - target: StartDocked.UserTileView
+    styles:
+      - Visibility=Collapsed
+themeResourceVariables:
+  - ''
+webContentStyles:
+  - target: ''
+    styles:
+      - ''
+webContentCustomJs: ''
