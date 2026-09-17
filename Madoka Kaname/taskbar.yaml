@@ -1,0 +1,11 @@
+theme: Luminosity_variant_Dock
+styleConstants:
+  - mbg=<WindhawkBlur BlurAmount="15" TintColor="{ThemeResource CardStrokeColorDefaultSolid}" TintOpacity="0.0" TintLuminosityOpacity="0" TintSaturation="1.0" NoiseDensity="1.0" NoiseOpacity="0.1" />
+controlStyles:
+  - target: SystemTray.TextIconContent > Grid#ContainerGrid > SystemTray.AdaptiveTextBlock#Base > TextBlock#InnerTextBlock
+    styles:
+      - Foreground=#c32142
+themeResourceVariables:
+  - ''
+clickThroughTaskbar: 1
+xamlDiagnosticsHandling: alert
